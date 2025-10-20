@@ -1,2 +1,3 @@
-# devweb2_lab4
-Fourth lab of dev web 2
+# devweb2_lab4 : Blogging app
+
+Creating a bloggin app with **graphQL**.
