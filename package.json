@@ -14,7 +14,21 @@
   "author": "",
   "type": "module",
   "main": "index.js",
+  "graphql": {
+    "schema": "./src/schemas/schema.js"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@apollo/server": "^5.0.0",
+    "@graphql-tools/schema": "^10.0.25",
+    "body-parser": "^2.2.0",
+    "express": "^5.1.0",
+    "graphql": "^16.11.0",
+    "graphql-subscriptions": "^3.0.0",
+    "graphql-ws": "^6.0.6",
+    "ws": "^8.18.3"
   }
 }
