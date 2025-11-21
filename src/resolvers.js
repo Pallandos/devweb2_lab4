@@ -1,4 +1,7 @@
 import db from './db.js';
+import { PubSub } from 'graphql-subscriptions';
+
+const pubsub = new PubSub();
 
 export const resolvers = {
     Query : {
@@ -30,6 +33,7 @@ export const resolvers = {
                 age: args.age
             };
             db.people.push(newPerson);
+            pubsub.publish('PERSON_ADDED', { personAdded: newPerson });
             return newPerson;
         },
         updatePerson: (_, args) => {
@@ -86,6 +90,12 @@ export const resolvers = {
         deletePost: (_, args) => {
             db.posts = db.posts.filter(post => post.id !== args.id);
             return db.posts;
+        }
+    },
+
+    Subscription: {
+        personAdded: {
+            subscribe: () => pubsub.asyncIterator(['PERSON_ADDED'])
         }
     }
 };

@@ -1,16 +1,55 @@
-import { ApolloServer } from "@apollo/server";
-import { startStandaloneServer } from "@apollo/server/standalone";
-import { typeDefs } from "./src/schema.js";
-import { resolvers } from "./src/resolvers.js";
+import { createServer } from 'http'; 
+import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer'; 
+import { makeExecutableSchema } from '@graphql-tools/schema'; 
+import { WebSocketServer } from 'ws'; 
+import { useServer } from 'graphql-ws/use/ws'; 
+import { ApolloServer } from '@apollo/server';
+import { expressMiddleware } from '@apollo/server/express4'; 
+import express from 'express'; 
+import cors from 'cors'; 
+import bodyParser from 'body-parser'; 
+import { typeDefs } from './src/schema.js'; 
+import { resolvers } from './src/resolvers.js'; 
 
-// Define your type definitions (schema)
+const app = express();
+const httpServer = createServer(app);
+
+const schema = makeExecutableSchema({ typeDefs, resolvers });
+
+const wsServer = new WebSocketServer({
+    server: httpServer,
+    path: '/graphql',
+});
+
+const serverCleanup = useServer({ schema }, wsServer);
+
 const server = new ApolloServer({
-    typeDefs,
-    resolvers,
+  schema,
+  plugins: [
+    ApolloServerPluginDrainHttpServer({ httpServer }),
+
+    {
+      async serverWillStart() {
+        return {
+          async drainServer() {
+            await serverCleanup.dispose();
+          },
+        };
+      },
+    },
+  ],
 });
 
-const url = await startStandaloneServer(server, {
-  listen: { port: 4000 },
-});
+await server.start();
 
-console.log(`Server ready at: ${url.url}`);
+app.use(
+  '/graphql',
+  cors(),
+  bodyParser.json(),
+  expressMiddleware(server),
+);
+
+const PORT = 4000;
+httpServer.listen(PORT, () => {
+  console.log(`Server is now running on http://localhost:${PORT}/graphql`);
+});
