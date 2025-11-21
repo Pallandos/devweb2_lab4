@@ -9,3 +9,5 @@ const posts = [
     { id: '2', title: 'Advanced GraphQL', author_id: '1' },
     { id: '3', title: 'GraphQL in Practice', author_id: '1' },
 ];
+
+export default { people, posts };
