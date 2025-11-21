@@ -95,7 +95,7 @@ export const resolvers = {
 
     Subscription: {
         personAdded: {
-            subscribe: () => pubsub.asyncIterator(['PERSON_ADDED'])
+            subscribe: () => pubsub.asyncIterableIterator(['PERSON_ADDED'])
         }
     }
 };
