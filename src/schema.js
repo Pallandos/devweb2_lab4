@@ -14,5 +14,6 @@ export const typeDefs = `#graphql
     type Query {
         people: [Person]
         posts: [Post]
+        post(id: ID!): Post
     }
 `
