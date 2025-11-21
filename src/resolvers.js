@@ -9,4 +9,16 @@ export const resolvers = {
             return db.posts.find(post => post.id === args.id);
         }
     },
+
+    Post : {
+        author: (parent) => {
+            return db.people.find(person => person.id === parent.author_id);
+        }
+    },
+
+    Person : {
+        posts: (parent) => {
+            return db.posts.filter(post => post.author_id === parent.id);
+        }
+    }
 };
