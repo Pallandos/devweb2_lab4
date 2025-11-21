@@ -39,4 +39,10 @@ export const typeDefs = `#graphql
         title: String
         author_id: ID
     }
+
+    type Subscription {
+        personAdded: Person!
+        postAdded: Post!
+        postUpdated: Post!
+    }
 `
