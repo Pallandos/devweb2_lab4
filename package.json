@@ -1,0 +1,26 @@
+{
+  "name": "devweb2_lab4",
+  "version": "1.0.0",
+  "description": "Creating a bloggin app with **graphQL**.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pallandos/devweb2_lab4.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/Pallandos/devweb2_lab4/issues"
+  },
+  "homepage": "https://github.com/Pallandos/devweb2_lab4#readme",
+  "dependencies": {
+    "@apollo/server": "^5.1.0",
+    "graphql": "^16.12.0"
+  }
+}
