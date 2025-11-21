@@ -25,10 +25,18 @@ export const typeDefs = `#graphql
         addPost(title: String!, author_id: ID!): Post!
         
         updatePerson(id: ID!, modfiedPerson: PersonInput!): Person!
+        updatePost(id: ID!, modfiedPost: PostInput!): Post!
+
+        deletePerson(id: ID!): [Person]
+        deletePost(id: ID!): [Post]
     }
 
     input PersonInput {
         name: String
         age: Int
+    }
+    input PostInput {
+        title: String
+        author_id: ID
     }
 `

@@ -48,6 +48,44 @@ export const resolvers = {
 
             // 4. Retourner l'objet mis à jour
             return db.people[index];
+        },
+        deletePerson: (_, args) => {
+            // Filtrer les personnes et des postes pour exclure celle avec l'ID donné
+            db.people = db.people.filter(person => person.id !== args.id);
+            db.posts = db.posts.filter(post => post.author_id !== args.id);
+            // Retourner la liste mise à jour des personnes
+            return db.people;
+        },
+        addPost: (_, args) => {
+            const authorExists = db.people.some(person => person.id === args.author_id);
+            if (!authorExists) {
+                throw new Error("Author not found");
+            }
+            const lastId = db.posts.length > 0 ? parseInt(db.posts[db.posts.length - 1].id) : 0;
+            const newPost = {
+                id: String(lastId + 1),
+                title: args.title,
+                author_id: args.author_id
+            };
+            db.posts.push(newPost);
+            return newPost;
+        },
+        updatePost: (_, args) => {
+            const index = db.posts.findIndex(p => p.id === args.id);
+            if (index === -1) return null;
+
+            const updatedPost = { ...db.posts[index] };
+            
+            db.posts[index] = {
+                ...updatedPost,
+                ...args.modfiedPost
+            };
+
+            return updatedPost;
+        },
+        deletePost: (_, args) => {
+            db.posts = db.posts.filter(post => post.id !== args.id);
+            return db.posts;
         }
     }
 };
