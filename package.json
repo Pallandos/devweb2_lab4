@@ -1,34 +1,26 @@
 {
-  "name": "blogging",
+  "name": "devweb2_lab4",
   "version": "1.0.0",
   "description": "Creating a bloggin app with **graphQL**.",
-  "homepage": "https://github.com/Pallandos/devweb2_lab4#readme",
-  "bugs": {
-    "url": "https://github.com/Pallandos/devweb2_lab4/issues"
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Pallandos/devweb2_lab4.git"
   },
-  "license": "ISC",
+  "keywords": [],
   "author": "",
+  "license": "ISC",
   "type": "module",
-  "main": "index.js",
-  "graphql": {
-    "schema": "./src/schemas/schema.js"
+  "bugs": {
+    "url": "https://github.com/Pallandos/devweb2_lab4/issues"
   },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
-  },
+  "homepage": "https://github.com/Pallandos/devweb2_lab4#readme",
   "dependencies": {
-    "@apollo/server": "^5.0.0",
-    "@graphql-tools/schema": "^10.0.25",
-    "body-parser": "^2.2.0",
-    "express": "^5.1.0",
-    "graphql": "^16.11.0",
-    "graphql-subscriptions": "^3.0.0",
-    "graphql-ws": "^6.0.6",
-    "ws": "^8.18.3"
+    "@apollo/server": "^5.1.0",
+    "graphql": "^16.12.0"
   }
 }
