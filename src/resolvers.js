@@ -72,6 +72,7 @@ export const resolvers = {
                 author_id: args.author_id
             };
             db.posts.push(newPost);
+            pubsub.publish('POST_ADDED', { postAdded: newPost });
             return newPost;
         },
         updatePost: (_, args) => {
@@ -85,7 +86,9 @@ export const resolvers = {
                 ...args.modfiedPost
             };
 
-            return updatedPost;
+            pubsub.publish('POST_UPDATED', { postUpdated: db.posts[index] });
+
+            return db.posts[index];
         },
         deletePost: (_, args) => {
             db.posts = db.posts.filter(post => post.id !== args.id);
@@ -96,6 +99,12 @@ export const resolvers = {
     Subscription: {
         personAdded: {
             subscribe: () => pubsub.asyncIterableIterator(['PERSON_ADDED'])
+        },
+        postAdded: {
+            subscribe: () => pubsub.asyncIterableIterator(['POST_ADDED'])
+        },
+        postUpdated: {
+            subscribe: () => pubsub.asyncIterableIterator(['POST_UPDATED'])
         }
     }
 };

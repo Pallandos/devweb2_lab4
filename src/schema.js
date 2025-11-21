@@ -42,5 +42,7 @@ export const typeDefs = `#graphql
 
     type Subscription {
         personAdded: Person!
+        postAdded: Post!
+        postUpdated: Post!
     }
 `
