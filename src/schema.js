@@ -13,6 +13,7 @@ export const typeDefs = `#graphql
 
     type Query {
         people: [Person]
+        person(id: ID!): Person
         posts: [Post]
         post(id: ID!): Post
     }
