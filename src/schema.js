@@ -19,4 +19,16 @@ export const typeDefs = `#graphql
         posts: [Post]
         post(id: ID!): Post
     }
+
+    type Mutation {
+        addPerson(name: String!, age: Int!): Person!
+        addPost(title: String!, author_id: ID!): Post!
+        
+        updatePerson(id: ID!, modfiedPerson: PersonInput!): Person!
+    }
+
+    input PersonInput {
+        name: String
+        age: Int
+    }
 `
